@@ -85,6 +85,7 @@ def main():
     executor = ThreadPoolExecutor(max_workers=2)
     all_task = []
 
+    print("[*] Starting ...")
     with open(options.hashes,'r') as f:
         for line in f:
             line = line.strip()
