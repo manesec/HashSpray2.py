@@ -21,7 +21,8 @@ def login(arg):
         kerb_principal = Principal(username, type=constants.PrincipalNameType.NT_PRINCIPAL.value)
         getKerberosTGT(kerb_principal, password, domain,
             unhexlify(lmhash), unhexlify(nthash), aesKey, dc_ip)
-        print('[+] Success %s/%s : %s' % (domain, username,nthash) )
+        print('[+] Success %s/%s - %s:%s' % (domain, username, lmhash, nthash) )
+        sys.exit(0)
 
     except KerberosError as e:
         if (e.getErrorCode() == constants.ErrorCodes.KDC_ERR_C_PRINCIPAL_UNKNOWN.value) or (e.getErrorCode() == constants.ErrorCodes.KDC_ERR_CLIENT_REVOKED.value) or (e.getErrorCode() == constants.ErrorCodes.KDC_ERR_WRONG_REALM.value):
@@ -102,7 +103,7 @@ def main():
             all_task.append(executor.submit(login,([user, '', domain, lmhash, nthash, None , options.dc_ip])))
 
     wait(all_task,return_when=ALL_COMPLETED)
-    print("[!] Done!")
+    print("[!] Done, Not found a valid hash!")
 
 if __name__ == "__main__":
     main()
