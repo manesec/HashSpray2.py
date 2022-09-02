@@ -1,9 +1,32 @@
-# HashSpray.py
+# HashSpray2.py
 
-Got hashes from a compromised machine and want to test if the password hash have been reused over multiple accounts? Get a userlist and spray with this tool with -hashes parameter and with the -target-ip pointing at ANY domain joined computer. You dont need to spray the heavy monitored domain controllers, authenticated users will have access to the IPC$ share by default.
+Note: This project fork @cube0x0 's [HashSpray.py](https://github.com/cube0x0/HashSpray.py).
+
+[@manesec](https://github.com/manesec) adding more features base on HashSpray.py which in
++ `HashSpray.py`
 
 
 This was built using the impacket library
+
+```
+python hashspray.py -user '<user>' -hashes <hashes.txt> -domain <domain> -dc-ip <apt>
+
+Kerberos AS-REQ Spraying Toolkit for a known user and PassTheHash Attack. (Base on domainspray.py and mod by @manesec).
+
+optional arguments:
+  -h, --help           show this help message and exit
+
+authentication:
+  -user user           A known users to spray, format is [[domain/]username
+  -hashes hashes_file  NTLM hashes, format is LMHASH:NTHASH in the files
+
+connection:
+  -domain domain       FQDN of the target domain
+  -dc-ip ip address    IP Address of the domain controller. If omitted it will use the domain part (FQDN) specified in the target parameter
+  -t int               Number of thread, default is 5
+  -v 0,1               Show trying message, 1 will be enable, default is 0
+
+```
 
 ```
 python domainspray.py -userlist users -hashes :1uca3d1bd1a33geb1b15bab12196r5aa -target-ip 192.168.5.1
